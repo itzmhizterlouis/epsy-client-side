@@ -1,31 +1,30 @@
-import HttpClient from '../http/httpClient';
+import axiosClient from '../http/axiosClient';
 
 class ApiService {
-  private httpClient: HttpClient;
-
-  constructor() {
-    this.httpClient = new HttpClient();
-  }
-
   // Example API methods - replace with your actual API endpoints
   async getUsers() {
-    return this.httpClient.get('/users');
+    const response = await axiosClient.get('/users');
+    return response.data;
   }
 
   async getUserById(id: string) {
-    return this.httpClient.get(`/users/${id}`);
+    const response = await axiosClient.get(`/users/${id}`);
+    return response.data;
   }
 
   async createUser(userData: any) {
-    return this.httpClient.post('/users', userData);
+    const response = await axiosClient.post('/users', userData);
+    return response.data;
   }
 
   async updateUser(id: string, userData: any) {
-    return this.httpClient.put(`/users/${id}`, userData);
+    const response = await axiosClient.put(`/users/${id}`, userData);
+    return response.data;
   }
 
   async deleteUser(id: string) {
-    return this.httpClient.delete(`/users/${id}`);
+    const response = await axiosClient.delete(`/users/${id}`);
+    return response.data;
   }
 }
 

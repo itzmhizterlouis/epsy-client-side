@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
+import { Button, Input } from '../components/ui';
 import { useApi } from '../hooks/useApi';
-import { User } from '../types/api/types';
 import { isValidEmail } from '../utils/validation';
+import { authService } from '../services/api';
+
+// Demo type for the example
+interface DemoUser {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   
-  const { data: users, isLoading, error, execute } = useApi<User[]>();
+  const { data: users, isLoading, error, execute } = useApi<DemoUser[]>();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -82,21 +92,41 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Layout title="React TypeScript App">
+    <Layout title="Epsy - Welcome">
       <div className="space-y-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Welcome to Your React TypeScript App
+            Welcome to Epsy
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            This is a well-structured React application with TypeScript, Tailwind CSS, and proper API integration patterns.
+            Your trusted platform for connecting with vendors and customers. Join our community today!
           </p>
+        </div>
+
+        {/* Authentication Section */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Get Started</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Button 
+              onClick={() => navigate('/signup')} 
+              className="w-full"
+            >
+              Create Account
+            </Button>
+            <Button 
+              onClick={() => navigate('/signin')} 
+              variant="secondary"
+              className="w-full"
+            >
+              Sign In
+            </Button>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form Section */}
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Add User</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Demo Form</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input
                 label="Name"
@@ -118,7 +148,7 @@ const Home: React.FC = () => {
                 required
               />
               <Button type="submit" loading={isLoading} className="w-full">
-                Add User
+                Submit Demo
               </Button>
             </form>
           </div>
@@ -152,22 +182,22 @@ const Home: React.FC = () => {
 
         {/* Features Section */}
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Project Features</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Platform Features</h3>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="text-center p-4">
-              <div className="text-blue-600 text-2xl mb-2">⚛️</div>
-              <h4 className="font-medium text-gray-900">React 18</h4>
-              <p className="text-sm text-gray-600">Latest React features and hooks</p>
+              <div className="text-blue-600 text-2xl mb-2">🛍️</div>
+              <h4 className="font-medium text-gray-900">Vendor Marketplace</h4>
+              <p className="text-sm text-gray-600">Connect with trusted vendors</p>
             </div>
             <div className="text-center p-4">
-              <div className="text-blue-600 text-2xl mb-2">📘</div>
-              <h4 className="font-medium text-gray-900">TypeScript</h4>
-              <p className="text-sm text-gray-600">Full type safety and IntelliSense</p>
+              <div className="text-blue-600 text-2xl mb-2">🔐</div>
+              <h4 className="font-medium text-gray-900">Secure Authentication</h4>
+              <p className="text-sm text-gray-600">Safe and verified accounts</p>
             </div>
             <div className="text-center p-4">
-              <div className="text-blue-600 text-2xl mb-2">🎨</div>
-              <h4 className="font-medium text-gray-900">Tailwind CSS</h4>
-              <p className="text-sm text-gray-600">Utility-first CSS framework</p>
+              <div className="text-blue-600 text-2xl mb-2">📱</div>
+              <h4 className="font-medium text-gray-900">Modern Platform</h4>
+              <p className="text-sm text-gray-600">Built with React & TypeScript</p>
             </div>
           </div>
         </div>

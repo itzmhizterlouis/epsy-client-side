@@ -1,8 +1,8 @@
 // Base API response types
 export interface ApiResponse<T = any> {
+  success: boolean;
+  message: string;
   data: T;
-  status: number;
-  statusText: string;
 }
 
 export interface PaginatedResponse<T> {
@@ -13,11 +13,50 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
-// Example User types - replace with your actual data types
+// Authentication types
+export interface RegisterRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  location: string;
+  isVendor: boolean;
+  vendorCategory?: 'CLOTHING' | 'FOOD' | 'ELECTRONICS' | 'HEALTH' | 'BEAUTY' | 'SPORTS' | 'BOOKS' | 'OTHER';
+}
+
+export interface RegisterResponse {
+  token: string | null;
+  userId: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  userId: string;
+}
+
+export interface VerifyOtpRequest {
+  email: string;
+  code: number;
+}
+
+export interface VerifyOtpResponse {
+  success: boolean;
+}
+
+// User types
 export interface User {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
+  location: string;
+  isVendor: boolean;
+  vendorCategory?: string;
   createdAt: string;
   updatedAt: string;
 }
