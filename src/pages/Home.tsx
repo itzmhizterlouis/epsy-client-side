@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, ProductCard, CategoryCard } from '../components/ui';
 import { mockCategories, getAllProducts, getProductsByCategory, searchProducts } from '../services/api/mockData';
-import { Product, Category } from '../types/api/types';
+import { Product } from '../types/api/types';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -58,14 +58,14 @@ const Home: React.FC = () => {
     loadProducts();
   };
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-NG', {
-      style: 'currency',
-      currency: 'NGN',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
+  // const formatPrice = (price: number) => {
+  //   return new Intl.NumberFormat('en-NG', {
+  //     style: 'currency',
+  //     currency: 'NGN',
+  //     minimumFractionDigits: 0,
+  //     maximumFractionDigits: 0,
+  //   }).format(price);
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
