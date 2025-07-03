@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input } from '../ui';
+import { Button } from '../ui';
 import { useApi } from '../../hooks/useApi';
 import { VerifyOtpRequest } from '../../types/api/types';
 import { authService } from '../../services/api';

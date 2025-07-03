@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Input } from '../ui';
 import { useApi } from '../../hooks/useApi';
 import { RegisterRequest } from '../../types/api/types';
-import { isValidEmail, isValidPassword } from '../../utils/validation';
+import { isValidEmail } from '../../utils/validation';
 import { authService } from '../../services/api';
 
 const SignUpForm: React.FC = () => {
