@@ -58,15 +58,6 @@ const Home: React.FC = () => {
     loadProducts();
   };
 
-  // const formatPrice = (price: number) => {
-  //   return new Intl.NumberFormat('en-NG', {
-  //     style: 'currency',
-  //     currency: 'NGN',
-  //     minimumFractionDigits: 0,
-  //     maximumFractionDigits: 0,
-  //   }).format(price);
-  // };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -187,13 +178,7 @@ const Home: React.FC = () => {
                   }`}
                   style={{ transitionDelay: `${index * 25}ms` }}
                 >
-                  <ProductCard
-                    product={product}
-                    onClick={() => {
-                      // TODO: Navigate to product detail page
-                      console.log('Product clicked:', product.name);
-                    }}
-                  />
+                  <ProductCard product={product} />
                 </div>
               ))}
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/api/types';
 
 interface ProductCardProps {
@@ -8,6 +9,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-NG', {
@@ -30,9 +32,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
     return date.toLocaleDateString();
   };
 
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      navigate(`/product/${product.productId}`);
+    }
+  };
+
   return (
     <div
-      onClick={onClick}
+      onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden group hover-lift"
@@ -84,10 +94,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
         <div className={`mt-3 flex space-x-2 transition-all duration-200 ${
           isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
         }`}>
-          <button className="flex-1 bg-blue-600 text-white text-xs py-2 px-3 rounded-md hover:bg-blue-700 transition-colors duration-200">
+          <button 
+            className="flex-1 bg-blue-600 text-white text-xs py-2 px-3 rounded-md hover:bg-blue-700 transition-colors duration-200"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/product/${product.productId}`);
+            }}
+          >
             View Details
           </button>
-          <button className="bg-gray-200 text-gray-700 text-xs py-2 px-3 rounded-md hover:bg-gray-300 transition-colors duration-200">
+          <button 
+            className="bg-gray-200 text-gray-700 text-xs py-2 px-3 rounded-md hover:bg-gray-300 transition-colors duration-200"
+            onClick={(e) => {
+              e.stopPropagation();
+              // TODO: Implement quick contact
+              alert('Quick contact coming soon!');
+            }}
+          >
             💬
           </button>
         </div>
